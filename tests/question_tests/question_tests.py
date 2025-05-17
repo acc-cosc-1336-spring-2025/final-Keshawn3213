@@ -42,3 +42,20 @@ class TestStockQuestion3(unittest.TestCase):
         # Check that Microsoft stock is included
         symbols = [stock.get_symbol() for stock in stock_list]
         self.assertIn("MSFT", symbols)
+
+import unittest
+from src.question_4.question_4 import get_most_likely_ancestor_consensus
+
+class TestQuestion4(unittest.TestCase):
+
+    def test_sample_case(self):
+        result = get_most_likely_ancestor_consensus("GATATATGCATATACTT", "ATAT")
+        self.assertEqual(result, (2, 4, 10))
+
+    def test_no_match(self):
+        result = get_most_likely_ancestor_consensus("GATCGTACGTAG", "AAAA")
+        self.assertEqual(result, ())
+
+    def test_match_at_start_and_end(self):
+        result = get_most_likely_ancestor_consensus("ATATGCGCATAT", "ATAT")
+        self.assertEqual(result, (1, 9))
