@@ -1,12 +1,22 @@
-#write function tests here, don't add input('') statements here!
 import unittest
+from src.question_2.question_2 import Stock
 
-#follow this example to add questions b, c, and d for testing including their functions
-from src.question_a.question_a import test_config
+class TestStockClass(unittest.TestCase):
 
-class Test_Config(unittest.TestCase):
+    def test_stock_getters(self):
+        stock = Stock("AAPL", "Apple Inc")
+        self.assertEqual(stock.get_symbol(), "AAPL")
+        self.assertEqual(stock.get_company_name(), "Apple Inc")
 
-    def test_question_a_config(self):
-        self.assertEqual(True, test_config())
+    def test_multiple_stocks(self):
+        stocks = [
+            ("CAT", "Caterpillar"),
+            ("EK", "Eastman Kodak"),
+            ("GOOG", "Google"),
+            ("MSFT", "Microsoft")
+        ]
 
-
+        for symbol, name in stocks:
+            stock = Stock(symbol, name)
+            self.assertEqual(stock.get_symbol(), symbol)
+            self.assertEqual(stock.get_company_name(), name)
